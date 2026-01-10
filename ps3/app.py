@@ -3,6 +3,12 @@ import numpy as np
 import pandas as pd
 import joblib
 
+import os
+import streamlit as st
+
+st.write("Working directory:", os.getcwd())
+st.write("Files here:", os.listdir("."))
+
 # -----------------------------
 # Load trained artifacts
 # -----------------------------
