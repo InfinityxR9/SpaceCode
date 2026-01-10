@@ -1,1 +1,14 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
 .venv/
+.DS_Store
+Thumbs.db
+.cache/
+.huggingface/
+datasets/
+*.aux
+*.log
+*.out
+*.toc
+*.pth
