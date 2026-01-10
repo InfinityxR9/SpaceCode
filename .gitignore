@@ -12,3 +12,5 @@ datasets/
 *.out
 *.toc
 *.pth
+ps3/nasa_neows.csv
+ps3/nasa_neows_1950_2025.csv
