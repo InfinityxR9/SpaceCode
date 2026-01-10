@@ -6,16 +6,13 @@ import joblib
 import os
 import streamlit as st
 
-st.write("Working directory:", os.getcwd())
-st.write("Files here:", os.listdir("."))
-
 # -----------------------------
 # Load trained artifacts
 # -----------------------------
-model = joblib.load("best_asteroid_hazard_model.pkl")
-imputer = joblib.load("feature_imputer.pkl")
-scaler = joblib.load("feature_scaler.pkl")
-meta = joblib.load("model_metadata.pkl")
+model = joblib.load("ps3/best_asteroid_hazard_model.pkl")
+imputer = joblib.load("ps3/feature_imputer.pkl")
+scaler = joblib.load("ps3/feature_scaler.pkl")
+meta = joblib.load("ps3/model_metadata.pkl")
 
 features = meta["feature_names"]
 log_cols = meta["log_transform_cols"]
