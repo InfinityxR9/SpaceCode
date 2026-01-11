@@ -1,0 +1,112 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{parskip}
+\geometry{margin=1in}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  pdfauthor={Team Dominators},
+  pdftitle={The Sentinel Shield - Near-Earth Comet (NEC) Classification}
+}
+
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.05}
+
+\title{\textbf{\Large The Sentinel Shield - Near-Earth Comet (NEC) Classification}}
+\author{
+\textbf{\MakeUppercase{TEAM DOMINATORS}}\\
+\textbf{Aryan Sisodiya (B25126)}, \textbf{Daksh Rathi (B25132)}, \textbf{Priyanshu Baranwal (B25165)}\\
+SpaceCode Hackathon 2026 — STAC IIT Mandi
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+{\large\textbf{Abstract}}
+\end{center}
+We present a machine learning system for automatic classification of Near-Earth Objects (NEOs) as
+Potentially Hazardous Objects (PHOs) using orbital and physical parameters from NASA’s NEOWS catalog
+(1950--2025). The model learns the physical hazard boundary defined by Minimum Orbit Intersection
+Distance (MOID) and Absolute Magnitude, while incorporating orbital dynamics such as eccentricity,
+inclination and relative velocity. A tree-based XGBoost classifier trained with class imbalance handling
+achieves \textbf{ROC-AUC = 0.999999} and \textbf{Recall = 0.9996}. The trained system is deployed as an
+interactive web application for real-time planetary defense risk assessment.
+
+\section*{Executive Summary}
+\textbf{What we did:} Built a supervised ML model to classify Near-Earth Objects as hazardous or safe.\\\\  
+\textbf{Performance:} ROC-AUC = 0.999999, Recall = 0.9996.\\\\  
+\textbf{Physics alignment:} Model recovers NASA’s MOID--Magnitude PHO rule.\\\\  
+\textbf{Deployment:} Live web app for real-time asteroid hazard prediction.
+
+\section{Problem}
+Near-Earth Objects such as asteroids and comets can pose a serious threat when their orbits bring them
+close to Earth and their size is sufficiently large. NASA defines a Potentially Hazardous Object (PHO)
+as one with Minimum Orbit Intersection Distance (MOID) not exceeding 0.05 AU and Absolute Magnitude
+$H$ not exceeding 22. PS-0.3 requires building a reliable and reproducible ML system that predicts this
+hazard status from orbital and physical parameters.
+
+\section{Dataset}
+We use NASA’s Near-Earth Object Web Service (NEOWS) dataset:
+\href{https://drive.google.com/file/d/1BN6ro6Qtfd4j7tUtlrgVzZ_Ts3axj6v0/view}{nasa\_neows\_1950\_2025.csv}.
+It contains 375,659 objects with physical properties, orbital elements, proximity metrics and
+dynamical indicators spanning 1950 to 2025.
+
+\section{Method}
+We remove identifiers and high-cardinality name fields, apply median imputation for missing values,
+log-transform skewed physical features such as diameter and velocity, and standardize all features.
+Because hazardous objects are statistically rare, SMOTE oversampling is used. An \textbf{XGBoost}
+classifier is trained to maximize recall and ROC-AUC.
+
+\section{Compute}
+Training was performed on an \textbf{NVIDIA RTX 3050 (6GB)} using Python, pandas, scikit-learn and
+XGBoost. Deployment is handled through Streamlit Cloud.
+
+\section{Results}
+The classifier separates hazardous and non-hazardous objects with near-perfect accuracy.
+A sharp probability transition is observed when MOID crosses the physical threshold of 0.05 AU,
+indicating that the learned decision boundary aligns with orbital mechanics.
+
+\section{Deployment}
+The trained model is deployed as a live interactive web application where users can test real
+asteroids and modify orbital parameters to observe hazard probabilities.
+
+Live application:
+\href{https://spacecode-ps3.streamlit.app/}{https://spacecode-ps3.streamlit.app/}
+
+\section{Conclusion}
+We built a complete, reproducible and deployed planetary defense classifier that identifies hazardous
+Near-Earth Objects from real astronomical data. The Sentinel Shield system demonstrates how machine
+learning and orbital mechanics can be combined into a working risk-assessment interface.
+
+\section*{Code and References}
+\textbf{Project Repository (PS-3):}
+\href{https://github.com/InfinityxR9/SpaceCode}{SpaceCode} (folder \texttt{ps3/})
+
+\textbf{Dataset:}
+\href{https://drive.google.com/file/d/1BN6ro6Qtfd4j7tUtlrgVzZ_Ts3axj6v0/view}{NASA NEOWS Dataset}
+
+\textbf{Deployment:}
+\href{https://spacecode-ps3.streamlit.app/}{Sentinel Shield Live App}
+
+\textbf{Team GitHub Profiles:}
+\begin{itemize}
+\item Aryan Sisodiya — \href{https://github.com/InfinityxR9}{InfinityxR9}
+\item Daksh Rathi — \href{https://github.com/dakshrathi-india}{dakshrathi-india}
+\item Priyanshu Baranwal — \href{https://github.com/priyanshubarnwal122-ai}{priyanshubarnwal122-ai}
+\end{itemize}
+
+\end{document}
